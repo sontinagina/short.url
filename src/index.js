@@ -76,7 +76,7 @@ const generateUniqueKey=function(){
  
 app.get("*/u/*",async (req,res)=>{
     console.log("server is heated");
-    const newUrl="https://srt-urls.herokuapp.com"+req.originalUrl;
+    const newUrl="https://srt-urls.herokuapp.com/getUrl"+req.originalUrl;
     console.log(req.originalUrl);
     
     if(req.originalUrl===undefined||req.originalUrl===null){
