@@ -1,6 +1,11 @@
 const cors = require("cors");
 const express = require("express");
 const app = express();
+// app.use(
+//     cors({
+//         origin:["https://short-urls-app.herokuapp.com/","http://localhost:3000/"]
+//     })
+//  );
 app.use(
     cors()
  );
@@ -34,7 +39,7 @@ const generateUniqueKey=function(){
     console.log(str);
     return str;
 }
- app.post("/getUrl",async (req,res)=>{
+ app.post("/getUrl",cors(),async (req,res)=>{
      const {url}=req.body;
      if(url===undefined||url===null){
         res.send({url:"Invalid url"});
@@ -61,6 +66,8 @@ const generateUniqueKey=function(){
             }
             // let newGenUrl=req.protocol+"://"+req.hostname+":"+3000+"/"+hashcode;
             let newGenUrl="https://srt-urls.herokuapp.com/u/"+hashcode;
+            // let newGenUrl="http://localhost:3009/u/"+hashcode;
+  
             console.log("new gen url:: ",newGenUrl);
              const newUser = new user({
                 url,
@@ -76,7 +83,8 @@ const generateUniqueKey=function(){
  
 app.get("*/u/*",async (req,res)=>{
     console.log("server is heated");
-    const newUrl="https://srt-urls.herokuapp.com/getUrl"+req.originalUrl;
+    const newUrl="https://srt-urls.herokuapp.com"+req.originalUrl;
+    // const newUrl="http://localhost:3009"+req.originalUrl;
     console.log(req.originalUrl);
     
     if(req.originalUrl===undefined||req.originalUrl===null){
@@ -85,6 +93,7 @@ app.get("*/u/*",async (req,res)=>{
     const curr_url = await user.find({
         newUrl
      },{url:1,_id:0});
+     console.log("curr urls::: ",curr_url);
      if(curr_url[0]!==null && curr_url[0]!=undefined){
          console.log(curr_url)
         res.writeHead(301,{"Location":curr_url[0].url})
@@ -98,7 +107,7 @@ app.get("*/u/*",async (req,res)=>{
 
 
 
- app.listen(process.env.PORT || 3000);
+ app.listen(process.env.PORT || 3009);
 //  app.listen(3000,()=>{
 //      console.log("server started.........");
 //  });
