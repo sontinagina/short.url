@@ -1,11 +1,11 @@
 const cors = require("cors");
 const express = require("express");
 const app = express();
-// app.use(
-//     cors({
-//         origin:["https://short-urls-app.herokuapp.com/","http://localhost:3000/"]
-//     })
-//  );
+app.use(
+    cors({
+        origin:["https://short-urls-app.herokuapp.com","http://localhost:3000/"]
+    })
+ );
 app.use(
     cors()
  );
