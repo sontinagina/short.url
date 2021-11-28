@@ -60,7 +60,7 @@ const generateUniqueKey=function(){
                  }
             }
             // let newGenUrl=req.protocol+"://"+req.hostname+":"+3000+"/"+hashcode;
-            let newGenUrl="https://tnny.herokuapp.com/u/"+hashcode;
+            let newGenUrl="https://srt-urls.herokuapp.com/u/"+hashcode;
             console.log("new gen url:: ",newGenUrl);
              const newUser = new user({
                 url,
@@ -76,7 +76,7 @@ const generateUniqueKey=function(){
  
 app.get("*/u/*",async (req,res)=>{
     console.log("server is heated");
-    const newUrl="https://tnny.herokuapp.com"+req.originalUrl;
+    const newUrl="https://srt-urls.herokuapp.com"+req.originalUrl;
     console.log(req.originalUrl);
     
     if(req.originalUrl===undefined||req.originalUrl===null){
